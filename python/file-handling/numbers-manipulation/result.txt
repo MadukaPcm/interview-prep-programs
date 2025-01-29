@@ -1,0 +1,5 @@
+========== RESULTS AFTER NUM PROCESSING ==========
+
+Total numbers in a file is : 50
+Sum of numbers in a file is : 516
+Average of numbers in the file is : 10.32

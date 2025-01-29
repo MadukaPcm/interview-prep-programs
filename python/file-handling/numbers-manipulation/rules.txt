@@ -1,0 +1,14 @@
+Let me help you convert this programming assignment instructions to text:
+In this assignment, we will be utilizing functions to read and write data to files. Attached to the assignment is the file "random.txt". This file contains an unspecified amount of random numbers, with each number entered on its own line.
+Your task is to create separate functions to perform the following operations:
+
+ 1. Read all numbers from the file and display them to the screen
+ 2. Count the amount of numbers stored in the file and display to the screen
+ 3. Calculate the sum of all numbers in the file and display to the screen
+ 4. Calculate the average of all numbers in the file and display to the screen
+ 5. Write the results from the prior functions (amount, sum, average) to a separate file named "result.txt"
+
+Each function should be executed in the order listed above at runtime, without the need for user interaction.
+The structure and overall design of each function is left up to you, as long as the intended functionality is accomplished.
+Also be sure to implement docstrings for each function to provide proper documentation.
+Would you like me to help you implement these functions? I can assist in creating a solution that meets all these requirements.
