@@ -3,20 +3,41 @@ const url = "http://localhost:8080/departments";
 
 // Querying data to database.
 const departmentList = document.querySelector(".department-list");
-let output = '';
-const renderDepartments = (departments) => {
-  departments.forEach(department => {
 
+const renderDepartments = (departments) => {
+  let index = 0;
+  output = `
+    <table border="1" cellpadding="2" cellspacing="1">
+      <thead>
+        <tr>
+          <th>#SN</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Code</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+  departments.forEach(department => {
+    index ++ ;
     output += `
-      <div class="department-data" data-id="${department.id}">
-       Department Name : <em class="dpt_name">${department.departmentName}</em> <br \>
-       Department Address : <em class="dpt_address"> ${department.departmentAddress}</em> <br \>
-       Department Code :  <em class="dpt_code">${department.departmentCode}</em> <br \>
-        <a href="#" id="edit-department">Edit</a> &nbsp&nbsp <a href="#" id="delete-department">Delete</a>
-        <hr>
-      </div>
+      <tr class="department-data" data-id="${department.id}">
+        <td>${index}</td>
+        <td class="dpt_name">${department.departmentName}</td>
+        <td class="dpt_address">${department.departmentAddress}</td>
+        <td class="dpt_code">${department.departmentCode}</td>
+        <td>
+          <a href="#" id="edit-department">Edit</a> &nbsp
+          <a href="#" id="delete-department">Delete</a>
+        </td>
+      </tr>
     `;
   });
+  output += `
+    </tbody>
+  </table>
+  `;
   departmentList.innerHTML = output;
 }
 
@@ -44,7 +65,10 @@ departmentList.addEventListener('click',(e) => {
   let editDepartmentIsPressed = e.target.id == 'edit-department';
   let deleteDepartmentIsPressed = e.target.id == 'delete-department';
 
-  let id = e.target.parentElement.dataset.id;
+  console.log(editDepartmentIsPressed);
+  console.log(deleteDepartmentIsPressed);
+
+  let id = e.target.closest("tr").dataset.id;
   console.log("department id ",id);
 
   if(deleteDepartmentIsPressed){
@@ -58,10 +82,10 @@ departmentList.addEventListener('click',(e) => {
   if(editDepartmentIsPressed){
     console.log("department on-click id ",id);
 
-    const parent = e.target.parentElement;
-    let dptName = parent.querySelector('.dpt_name').textContent;
-    let dptAddress = parent.querySelector('.dpt_address').textContent;
-    let dptCode = parent.querySelector('.dpt_code').textContent;
+    const row = e.target.closest("tr");
+    let dptName = row.querySelector('.dpt_name').textContent;
+    let dptAddress = row.querySelector('.dpt_address').textContent;
+    let dptCode = row.querySelector('.dpt_code').textContent;
 
     departmentName.value = dptName;
     departmentAddress.value = dptAddress;
@@ -121,6 +145,7 @@ createDepartmentForm.addEventListener('submit', (e) => {
     const departmentArray = [];
     departmentArray.push(data);
     renderDepartments(departmentArray);
+    location.reload();
 
     alert("Department added successfully !!");
 
