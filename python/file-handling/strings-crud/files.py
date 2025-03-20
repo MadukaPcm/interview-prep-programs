@@ -5,7 +5,6 @@ import os
   a = Append
   W = Write
   x = Create
-  
 '''
 
 # file_sample = open("name_list.txt","x")

@@ -2,84 +2,62 @@ apple banana mango grape orange peach cherry kiwi lemon
 banana mango apple orange grape kiwi lemon cherry peach
 mango apple banana grape orange lemon cherry peach kiwi
 grape orange banana mango apple cherry peach kiwi lemon
-  
 
 
-# Function to read numbers from a file
-def read_numbers(filename):
-    with open(filename, "r") as f:
-        lines = f.readlines()
-    
-    # Convert text data to a 2D list of numbers
-    data = [[int(num) for num in line.split()] for line in lines]
-    return data
+# Function to find minimum manually
+def find_min(lst):
+    min_value = lst[0]
+    for num in lst:
+        if num < min_value:
+            min_value = num
+    return min_value
 
-# Function to compute sum of each column
-def column_sum(data):
-    cols = len(data[0])
-    sums = [0] * cols
-    for row in data:
-        for i in range(cols):
-            sums[i] += row[i]
-    return sums
+# Function to find maximum manually
+def find_max(lst):
+    max_value = lst[0]
+    for num in lst:   
+        if num > max_value:
+            max_value = num
+    return max_value
 
-# Function to compute mean of each column
-def column_mean(data):
-    sums = column_sum(data)
-    count = len(data)
-    return [s / count for s in sums]
+# Function to find sum manually
+def find_sum(lst):
+    total = 0
+    for num in lst:
+        total += num
+    return total
 
-# Function to compute median of each column
-def column_median(data):
-    cols = len(data[0])
-    medians = []
-    for i in range(cols):
-        column_values = sorted(row[i] for row in data)
-        n = len(column_values)
-        if n % 2 == 1:
-            medians.append(column_values[n // 2])
-        else:
-            medians.append((column_values[n // 2 - 1] + column_values[n // 2]) / 2)
-    return medians
+# Read the file and process rows using a for loop
+rows = []
+with open("data.txt", "r") as file:
+    for line in file:  # Using for loop to read each line
+        row = line.strip().split()  # Split numbers
+        row = [int(num) for num in row]  # Convert to integers
+        rows.append(row)
 
-# Function to compute standard deviation of each column
-def column_std_dev(data):
-    means = column_mean(data)
-    cols = len(data[0])
-    std_devs = [0] * cols
-    count = len(data)
-    
-    for row in data:
-        for i in range(cols):
-            std_devs[i] += (row[i] - means[i]) ** 2
-    
-    return [(s / count) ** 0.5 for s in std_devs]
+# Process each row manually
+print("Row-wise statistics:\n")
+row_index = 1  # Manual row counter
+for row in rows:
+    row_min = find_min(row)  # Find minimum manually
+    row_max = find_max(row)  # Find maximum manually
+    row_sum = find_sum(row)  # Find sum manually
 
-# Function to compute frequency of each number in each column
-def column_frequency(data):
-    cols = len(data[0])
-    freq_dicts = [{} for _ in range(cols)]
-    
-    for row in data:
-        for i in range(cols):
-            num = row[i]
-            if num in freq_dicts[i]:
-                freq_dicts[i][num] += 1
-            else:
-                freq_dicts[i][num] = 1
-    return freq_dicts
+    # Calculate percentages manually
+    percentages = []
+    for num in row:
+        percentages.append((num / row_sum) * 100)
 
-# Read data
-data = read_numbers("numbers.txt")
+    # Print row statistics
+    print("Row", row_index, ":")
+    print("  Numbers:", row)
+    print("  Min:", row_min, ", Max:", row_max, ", Sum:", row_sum)
 
-# Compute statistics
-print("Sum of columns:", column_sum(data))
-print("Mean of columns:", column_mean(data))
-print("Median of columns:", column_median(data))
-print("Standard Deviation of columns:", column_std_dev(data))
+    # Format percentages manually
+    percentage_strings = []
+    for percent in percentages:
+        percentage_strings.append(f"{percent:.2f}%")
 
-# Compute frequency
-freq = column_frequency(data)
-print("\nFrequency Count per column:")
-for i, col_freq in enumerate(freq):
-    print(f"Column {i+1}: {col_freq}")
+    print("  Percentages:", percentage_strings, "\n")
+
+    row_index += 1  # Increment row counter manually
