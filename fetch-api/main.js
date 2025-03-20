@@ -88,7 +88,10 @@ departmentList.addEventListener('click',(e) => {
         })
       })
       .then(res => res.json())
-      .then(location.reload())
+      .then(() =>{
+        alert("Department updated successfully !i.");
+        location.reload()
+      })
     }
   })
 
@@ -99,6 +102,8 @@ departmentList.addEventListener('click',(e) => {
 // Method: POST
 createDepartmentForm.addEventListener('submit', (e) => {
   e.preventDefault();
+
+  console.log("Posting ");
 
   fetch(url, {
     method:'POST',
@@ -116,8 +121,16 @@ createDepartmentForm.addEventListener('submit', (e) => {
     const departmentArray = [];
     departmentArray.push(data);
     renderDepartments(departmentArray);
+
+    alert("Department added successfully !!");
+
+    departmentName.value = '';
+    departmentAddress.value = '';
+    departmentCode.value = '';
   })
-  alert("Department added successfully !!");
+  .catch(error => {
+    console.error('Error: ',error);
+  })
 })
 
 
