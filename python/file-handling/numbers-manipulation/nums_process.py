@@ -33,6 +33,8 @@ def read_file(nums_file):
     return None
   
   with open(nums_file, 'r') as file:
+    file.seek(0)
+    # lines = file.readlines()
     for line in file:
       row = line.strip().split()
       row = [int(num) for num in row]
@@ -64,13 +66,13 @@ def compute_frequency(nums_file):
   with open(nums_file, 'r') as file:
     data = file.read().strip().split()
     data = [int(num) for num in data] 
+    data = sorted(data)
     frequency = Counter(data)
     
     print("Number(No)  Frequency(F)")
     for item, freq in frequency.items():
       print("{}    -      {}".format(item,freq))
       
-
   
 render_result(nums_file)
 compute_frequency(nums_file)
