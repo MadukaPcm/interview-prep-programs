@@ -1,5 +1,5 @@
 // base backend-url.
-const url = "http://localhost:8080/departments";
+const url = "http://localhost:8081/departments";
 
 // Querying data to database.
 const departmentList = document.querySelector(".department-list");
