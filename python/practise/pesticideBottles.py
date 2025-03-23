@@ -5,22 +5,15 @@ bottles = sorted(bottles, reverse=True)  # Sort in descending order
 
 area = int(input("Enter area size in litres: "))
 
-# Calculate the total capacity of all bottles
-total_capacity = sum(bottles)
+remainedArea = area
+count = 0
 
-# Check if the area is greater than the total capacity
-if area > total_capacity:
-  print("Error: The area is larger than the total capacity of all bottles.")
-else:
-  used_bottles = []
-  for bottle in bottles:
-    while area >= bottle:
-      used_bottles.append(bottle)
-      area -= bottle
+for bottle in bottles:
+  if remainedArea >= bottle:
+    count = int(remainedArea/bottle)
+    remainedArea %= bottle
+    print("{} little of bottle {} bottles.".format(bottle,count))
 
-  print("Bottles used:")
-  for used_bottle in used_bottles:
-    print(used_bottle)
+if remainedArea > 0:
+  print("No enough bottle to satisfy the ramained area.")
   
-  if area > 0:
-    print(f"Remaining area that cannot be covered: {area} litres")
